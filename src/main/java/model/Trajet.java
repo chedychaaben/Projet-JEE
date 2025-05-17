@@ -8,12 +8,6 @@ import java.time.LocalTime;
 @Table(name = "Trajet")
 public class Trajet {
 
-    public enum ClasseDeVoyage {
-        PREMIERE,
-        DEUXIEME,
-        ECONOMIQUE
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,14 +25,6 @@ public class Trajet {
     @Column(name = "heure_arrivee")
     private LocalTime heureArrivee;
 
-    @ManyToOne
-    @JoinColumn(name = "gare_depart_id")
-    private Gare gareDepart;
-
-    @ManyToOne
-    @JoinColumn(name = "gare_arrivee_id")
-    private Gare gareArrivee;
-
     @Column(name = "date")
     private LocalDate date;
 
@@ -48,26 +34,16 @@ public class Trajet {
     @Column(name = "places_disponibles")
     private int placesDisponibles;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "classe_de_voyage")
-    private ClasseDeVoyage classeDeVoyage;
 
-    @Column(name = "place_cote_fenetre")
-    private boolean placeCoteFenetre;
-
-    @Column(name = "espace_famille")
-    private boolean espaceFamille;
-
-    @Column(name = "wagon_non_fumeur")
-    private boolean wagonNonFumeur;
+    @Column(name = "estSupprimer")
+    private boolean estSupprimer = false;
 
     public Trajet() {
         // Constructeur requis par JPA
     }
 
     public Trajet(String villeDepart, LocalTime heureDepart, String villeArrivee, LocalTime heureArrivee,
-                  LocalDate date, double prix, int placesDisponibles, ClasseDeVoyage classeDeVoyage,
-                  boolean placeCoteFenetre, boolean espaceFamille, boolean wagonNonFumeur) {
+                  LocalDate date, double prix, int placesDisponibles) {
         this.villeDepart = villeDepart;
         this.heureDepart = heureDepart;
         this.villeArrivee = villeArrivee;
@@ -75,10 +51,19 @@ public class Trajet {
         this.date = date;
         this.prix = prix;
         this.placesDisponibles = placesDisponibles;
-        this.classeDeVoyage = classeDeVoyage;
-        this.placeCoteFenetre = placeCoteFenetre;
-        this.espaceFamille = espaceFamille;
-        this.wagonNonFumeur = wagonNonFumeur;
+    }
+
+
+    public Trajet(int id, String villeDepart, LocalTime heureDepart, String villeArrivee, LocalTime heureArrivee,
+                  LocalDate date, double prix, int placesDisponibles) {
+        this.id = id;
+        this.villeDepart = villeDepart;
+        this.heureDepart = heureDepart;
+        this.villeArrivee = villeArrivee;
+        this.heureArrivee = heureArrivee;
+        this.date = date;
+        this.prix = prix;
+        this.placesDisponibles = placesDisponibles;
     }
 
     // Getters et Setters
@@ -143,35 +128,11 @@ public class Trajet {
         this.placesDisponibles = placesDisponibles;
     }
 
-    public ClasseDeVoyage getClasseDeVoyage() {
-        return classeDeVoyage;
+    public boolean isEstSupprimer() {
+        return estSupprimer;
     }
 
-    public void setClasseDeVoyage(ClasseDeVoyage classeDeVoyage) {
-        this.classeDeVoyage = classeDeVoyage;
-    }
-
-    public boolean isPlaceCoteFenetre() {
-        return placeCoteFenetre;
-    }
-
-    public void setPlaceCoteFenetre(boolean placeCoteFenetre) {
-        this.placeCoteFenetre = placeCoteFenetre;
-    }
-
-    public boolean isEspaceFamille() {
-        return espaceFamille;
-    }
-
-    public void setEspaceFamille(boolean espaceFamille) {
-        this.espaceFamille = espaceFamille;
-    }
-
-    public boolean isWagonNonFumeur() {
-        return wagonNonFumeur;
-    }
-
-    public void setWagonNonFumeur(boolean wagonNonFumeur) {
-        this.wagonNonFumeur = wagonNonFumeur;
+    public void setEstSupprimer(boolean estSupprimer) {
+        this.estSupprimer = estSupprimer;
     }
 }

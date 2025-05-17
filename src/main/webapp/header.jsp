@@ -18,8 +18,8 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarButtons">
             <div class="d-flex gap-2">
-                <a href="login.jsp" class="btn btn-outline-dark">Se connecter</a>
-                <a href="signup.jsp" class="btn btn-dark">Creer un compte</a>
+                <a href="se_connecter.jsp" class="btn btn-outline-dark">Se connecter</a>
+                <a href="cree_un_compte.jsp" class="btn btn-dark">Creer un compte</a>
             </div>
         </div>
     </div>

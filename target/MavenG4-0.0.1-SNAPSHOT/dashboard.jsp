@@ -2,7 +2,7 @@
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("se_connecter.jsp");
         return;
     }
 %>
@@ -11,7 +11,7 @@
 <head><title>Dashboard</title></head>
 <body>
 <h2>Bienvenue, <%= user.getPrenom() %>!</h2>
-<p>Votre rôle: <%= user.getRole() %></p>
-<a href="logout">Se déconnecter</a>
+<p>Votre rôle: <%= user.isEstAdmin() %></p>
+<a href="utilisateurs?action=se_deconnecter">Se déconnecter</a>
 </body>
 </html>

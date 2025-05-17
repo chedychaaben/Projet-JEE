@@ -1,7 +1,6 @@
 package dao;
 
 import model.Trajet;
-import model.Trajet.ClasseDeVoyage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -97,14 +96,6 @@ public class TrajetDAO {
         return result;
     }
 
-    public List<Trajet> findByClasse(ClasseDeVoyage classe) {
-        Session session = sessionFactory.openSession();
-        List<Trajet> result = session.createQuery("from Trajet where classeDeVoyage = :classe", Trajet.class)
-                .setParameter("classe", classe)
-                .getResultList();
-        session.close();
-        return result;
-    }
 
     public List<Trajet> findByDate(LocalDate date) {
         Session session = sessionFactory.openSession();

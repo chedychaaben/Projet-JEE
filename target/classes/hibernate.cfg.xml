@@ -14,10 +14,8 @@
 <property name="hibernate.hbm2ddl.auto">update</property>
 <!-- Entités à scanner pour Hibernate -->
 <mapping class="model.User"/>
-<mapping class="model.Voyage"/>
 <mapping class="model.Trajet"/>
 <mapping class="model.Billet"/>
-<mapping class="model.Gare"/>
 </session-factory>
 </hibernate-configuration>
 

@@ -6,11 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "User")
 public class User {
 
-    public enum Role {
-        USER,
-        ADMIN
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,20 +23,23 @@ public class User {
     @Column(name = "motdepasse")
     private String motdepasse;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
+    @Column(name = "estAdmin")
+    private boolean estAdmin;
+
+    @Column(name = "estBanned")
+    private boolean estBanned;
 
     public User() {
         // JPA requires a default constructor
     }
 
-    public User(String nom, String prenom, String email, String motdepasse, Role role) {
+    public User(String nom, String prenom, String email, String motdepasse) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.motdepasse = motdepasse;
-        this.role = role;
+        this.estAdmin = false;
+        this.estBanned = false;
     }
 
     public int getId() {
@@ -80,11 +78,19 @@ public class User {
         this.motdepasse = motdepasse;
     }
 
-    public Role getRole() {
-        return role;
+    public boolean isEstAdmin() {
+        return estAdmin;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setEstAdmin(boolean estAdmin) {
+        this.estAdmin = estAdmin;
+    }
+
+    public boolean isEstBanned() {
+        return estBanned;
+    }
+
+    public void setEstBanned(boolean estBanned) {
+        this.estBanned = estBanned;
     }
 }

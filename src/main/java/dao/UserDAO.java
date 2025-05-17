@@ -1,7 +1,6 @@
 package dao;
 
 import model.User;
-import model.User.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,94 +9,79 @@ import util.HibernateUtil;
 import java.util.List;
 
 public class UserDAO {
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public UserDAO() {
-        sessionFactory = HibernateUtil.getSessionFactory();
+        this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     public User findById(int id) {
-        Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
-        session.close();
-        return user;
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(User.class, id);
+        }
     }
 
     public boolean create(User user) {
-        Session session = sessionFactory.openSession();
         Transaction tx = null;
-        boolean success = false;
-        try {
+        try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
             session.persist(user);
             tx.commit();
-            success = true;
+            return true;
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             throw e;
-        } finally {
-            session.close();
         }
-        return success;
     }
 
     public boolean update(int id, String email, String motdepasse) {
-        Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
-        boolean success = false;
-        if (user != null) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            if (user == null) return false;
             user.setEmail(email);
             user.setMotdepasse(motdepasse);
-            Transaction tx = null;
-            try {
-                tx = session.beginTransaction();
-                session.merge(user);
-                tx.commit();
-                success = true;
-            } catch (Exception e) {
-                if (tx != null) tx.rollback();
-                throw e;
-            } finally {
-                session.close();
-            }
+            tx = session.beginTransaction();
+            session.merge(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
         }
-        return success;
     }
 
     public boolean delete(int id) {
-        Session session = sessionFactory.openSession();
-        User user = session.get(User.class, id);
-        boolean success = false;
-        if (user != null) {
-            Transaction tx = null;
-            try {
-                tx = session.beginTransaction();
-                session.remove(user);
-                tx.commit();
-                success = true;
-            } catch (Exception e) {
-                if (tx != null) tx.rollback();
-                throw e;
-            } finally {
-                session.close();
-            }
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            if (user == null) return false;
+            tx = session.beginTransaction();
+            session.remove(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
         }
-        return success;
     }
 
     public List<User> findAll() {
-        Session session = sessionFactory.openSession();
-        List<User> result = session.createQuery("from User", User.class).getResultList();
-        session.close();
-        return result;
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from User", User.class).getResultList();
+        }
     }
 
-    public List<User> findByRole(Role role) {
-        Session session = sessionFactory.openSession();
-        List<User> users = session.createQuery("from User where role = :role", User.class)
-                .setParameter("role", role)
-                .getResultList();
-        session.close();
-        return users;
+    /**
+     * Récupère tous les utilisateurs selon leur rôle admin ou non.
+     * @param estAdmin true pour admins, false pour utilisateurs normaux
+     * @return liste des utilisateurs filtrés par rôle
+     */
+    public List<User> findByRole(boolean estAdmin) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from User where estAdmin = :estAdmin", User.class)
+                    .setParameter("estAdmin", estAdmin)
+                    .getResultList();
+        }
     }
 }
