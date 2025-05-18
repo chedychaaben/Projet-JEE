@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ASUS
-  Date: 5/17/2025
-  Time: 4:26 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ include file="header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+
+Historique des billets
+
+
+
+for billet in billets of this user :)
 
 </body>
 </html>

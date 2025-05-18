@@ -12,7 +12,8 @@
     <form action="RecherchetrajetController" method="post">
         <label for="date">Date :</label>
         <input type="date" id="date" name="date" required>
-        <br><br>
+        <br>
+        <br>
 
         <label for="villeDepart">Ville de départ :</label>
         <select id="villeDepart" name="villeDepart" required>

@@ -1,6 +1,7 @@
 package controller;
 
 import dao.UserDAO;
+import model.Trajet;
 import model.User;
 
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/utilisateurs")
 public class UtilisateurController extends HttpServlet {
@@ -39,12 +41,14 @@ public class UtilisateurController extends HttpServlet {
             request.getSession().invalidate();
             response.sendRedirect("se_connecter.jsp");
         }
+
+        if (action.equals("lister_tous_les_utilisateurs")) {
+            List<User> utilisateurs = userDAO.findAll();
+            request.setAttribute("utilisateurs", utilisateurs);
+            request.getRequestDispatcher("/admin/liste_des_utilisateurs.jsp").forward(request, response);
+            return;
+        }
     }
-
-
-
-
-
 
 
 
@@ -97,7 +101,11 @@ public class UtilisateurController extends HttpServlet {
         if (found != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", found);
-            response.sendRedirect("dashboard.jsp"); // Modifier si nécessaire
+            if (found.isEstAdmin()) {
+                response.sendRedirect("admin/admin.jsp");
+            } else {
+                response.sendRedirect("pageacceuil.jsp");
+            }
         } else {
             request.setAttribute("error", "Identifiants invalides.");
             request.getRequestDispatcher("se_connecter.jsp").forward(request, response);

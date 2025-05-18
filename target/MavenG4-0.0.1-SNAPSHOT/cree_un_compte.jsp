@@ -1,21 +1,48 @@
+<%@ include file="header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Cree un compte</title>
-</head>
-<body>
-<h2>Cree un compte</h2>
-<form action="utilisateurs?action=cree_un_compte" method="post">
-    <label>Nom: <input type="text" name="nom" required /></label><br/>
-    <label>Prénom: <input type="text" name="prenom" required /></label><br/>
-    <label>Email: <input type="email" name="email" required /></label><br/>
-    <label>Mot de passe: <input type="password" name="motdepasse" required /></label><br/>
+    <title>Créer un compte</title>
+    </head>
+<body class="bg-light">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm p-4" style="max-width: 450px; width: 100%;">
+        <h2 class="card-title mb-4 text-center">Créer un compte</h2>
 
-    <label>
-        <input type="checkbox" name="estAdmin" value="false" /> Admin
-    </label><br/>
-    <input type="submit" value="Cree un compte"/>
-</form>
+
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger" role="alert">
+                    ${error}
+            </div>
+        </c:if>
+
+
+        <form action="utilisateurs?action=cree_un_compte" method="post">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" required />
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+                <label for="motdepasse" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="motdepasse" name="motdepasse" required />
+            </div>
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="estAdmin" name="estAdmin" value="true" />
+                <label class="form-check-label" for="estAdmin">Admin</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Créer un compte</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
