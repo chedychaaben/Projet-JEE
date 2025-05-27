@@ -32,7 +32,7 @@
             <% } else { %>
                 <a href="admin/admin.jsp" class="btn btn-outline-dark">Admin</a>
             <% } %>
-                <a href="utilisateurs?action=se_deconnecter" class="btn btn-dark">Déconnexion</a>
+                <a href="utilisateurs?action=se_deconnecter" class="btn btn-dark">Deconnexion</a>
             <% } %>
         </div>
     </div>

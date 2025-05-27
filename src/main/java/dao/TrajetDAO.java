@@ -118,4 +118,19 @@ public class TrajetDAO {
         session.close();
         return result;
     }
+
+
+    public List<Trajet> findByVilleDepartAndDate(String villeDepart, LocalDate date) {
+        Session session = sessionFactory.openSession();
+        List<Trajet> result = session.createQuery(
+                        "from Trajet where villeDepart = :villeDepart and date = :date",
+                        Trajet.class)
+                .setParameter("villeDepart", villeDepart)
+                .setParameter("date", date)
+                .getResultList();
+        session.close();
+        return result;
+    }
+
+
 }

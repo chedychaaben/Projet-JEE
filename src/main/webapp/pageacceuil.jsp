@@ -9,14 +9,15 @@
 <div class="container mt-5">
     <h1 class="text-primary">Bonjour!</h1>
     <p>Rechercher un trajet</p>
-    <form action="RecherchetrajetController" method="post">
+    <form action="recherche" method="get">
+        <input type="hidden" name="direction" value="1">
         <label for="date">Date :</label>
         <input type="date" id="date" name="date" required>
         <br>
         <br>
 
-        <label for="villeDepart">Ville de départ :</label>
-        <select id="villeDepart" name="villeDepart" required>
+        <label for="ville_depart">Ville de départ :</label>
+        <select id="ville_depart" name="ville_depart" required>
             <option value="" disabled selected>-- Sélectionnez une ville --</option>
             <option value="Ariana">Ariana</option>
             <option value="Beja">Béja</option>
@@ -45,8 +46,8 @@
         </select>
         <br><br>
 
-        <label for="villeArrivee">Ville d'arrivée :</label>
-        <select id="villeArrivee" name="villeArrivee" required>
+        <label for="ville_arrivee">Ville d'arrivée :</label>
+        <select id="ville_arrivee" name="ville_arrivee" required>
             <option value="" disabled selected>-- Sélectionnez une ville --</option>
             <option value="Ariana">Ariana</option>
             <option value="Beja">Béja</option>

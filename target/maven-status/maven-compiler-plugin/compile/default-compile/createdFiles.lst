@@ -1,4 +1,4 @@
-controller\ReservationController.class
+controller\PaiementController.class
 model\Billet$Classe.class
 model\Trajet.class
 controller\UtilisateurController.class
@@ -6,6 +6,7 @@ dao\BilletDAO.class
 model\Billet.class
 controller\RecherchetrajetController.class
 util\HibernateUtil.class
+controller\CommandeController.class
 model\Billet$Etat.class
 controller\TrajetController.class
 dao\TrajetDAO.class
