@@ -108,16 +108,14 @@ public class PaiementController extends HttpServlet {
         boolean paiementOK = verifierPaiement(numeroCarte, dateExpiration, cvv);
 
         if (paiementOK) {
-            // Check id1 before parsing
             Trajet trajetAller = null;
             if (id1 != null && !id1.isEmpty()) {
                 try {
                     trajetAller = trajetDAO.findById(Integer.parseInt(id1));
                 } catch (NumberFormatException e) {
-                    // Handle invalid id1 format gracefully
                     req.setAttribute("message", "Identifiant du trajet aller invalide.");
                     req.getRequestDispatcher("paiement.jsp").forward(req, res);
-                    return; // stop processing
+                    return;
                 }
             } else {
                 req.setAttribute("message", "Identifiant du trajet aller manquant.");
@@ -136,8 +134,12 @@ public class PaiementController extends HttpServlet {
                 }
             }
 
-            User user = userDAO.findByEmail("chedychaaben@gmail.com"); // Replace with session user if needed
-
+            User user = (User) req.getSession().getAttribute("user");
+            if (user == null) {
+                req.setAttribute("message", "Utilisateur non connecté.");
+                req.getRequestDispatcher("paiement.jsp").forward(req, res);
+                return;
+            }
             Billet billet = new Billet();
             billet.setEtat(Billet.Etat.ACHETE);
             billet.setUser(user);

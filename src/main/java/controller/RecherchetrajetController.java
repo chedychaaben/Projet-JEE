@@ -42,7 +42,7 @@ public class RecherchetrajetController extends HttpServlet {
             String idAllerStr = request.getParameter("id_aller");
             int idAller = Integer.parseInt(idAllerStr);
             Trajet trajet = trajetDAO.findById(idAller);
-            trajets = trajetDAO.findByVilleDepartAndDate(trajet.getVilleArrivee(), trajet.getDate());
+            trajets = trajetDAO.findByVilleDepart(trajet.getVilleArrivee());
         }
         request.setAttribute("trajets", trajets);
         request.getRequestDispatcher("/reservation.jsp").forward(request, response);
