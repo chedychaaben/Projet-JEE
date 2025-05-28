@@ -4,20 +4,14 @@
 <html>
 <head>
     <title>Créer un compte</title>
-    </head>
+</head>
 <body class="bg-light">
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4" style="max-width: 450px; width: 100%;">
-        <h2 class="card-title mb-4 text-center">Créer un compte</h2>
-
-
+    <div class="card p-4">
+        <h2 class="card-title text-center mb-4">Créer un compte</h2>
         <c:if test="${not empty error}">
-            <div class="alert alert-danger" role="alert">
-                    ${error}
-            </div>
+            <div class="alert alert-danger">${error}</div>
         </c:if>
-
-
         <form action="utilisateurs?action=cree_un_compte" method="post">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
@@ -43,6 +37,5 @@
         </form>
     </div>
 </div>
-
 </body>
 </html>

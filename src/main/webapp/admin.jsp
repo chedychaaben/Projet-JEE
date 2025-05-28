@@ -5,24 +5,14 @@
     <title>Page Admin</title>
 </head>
 <body>
-
-<a href="${pageContext.request.contextPath}/trajets?action=lister_tous_les_trajets">
-    Gerer les trajets
-</a>
-
-
-
-
-<a href="${pageContext.request.contextPath}/utilisateurs?action=lister_tous_les_utilisateurs">
-    Gerer les utilisateurs
-</a>
-
-
-<a href="billets?action=lister_tous_les_demandes_annulation">
-    Gerer les demandes d'annulation
-</a>
-
-
-
+<div class="card p-4">
+    <h1 class="text-center mb-4">Panneau d'Administration</h1>
+    <div class="d-flex flex-column align-items-center gap-3">
+        <a href="${pageContext.request.contextPath}/trajets?action=lister_tous_les_trajets" class="btn btn-primary w-50">Gérer les trajets</a>
+        <a href="${pageContext.request.contextPath}/utilisateurs?action=lister_tous_les_utilisateurs" class="btn btn-primary w-50">Gérer les utilisateurs</a>
+        <a href="billets?action=lister_tous_les_demandes_annulation" class="btn btn-primary w-50">Gérer les demandes d'annulation</a>
+    </div>
+</div>
+</div>
 </body>
 </html>
