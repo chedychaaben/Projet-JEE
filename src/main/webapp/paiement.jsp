@@ -4,7 +4,18 @@
 <body>
 <h2>Entrez vos informations de paiement</h2>
 
-<form action="" method="post">
+<form action="paiement" method="post">
+    <input type="hidden" name="id1" value="${id1}" />
+    <input type="hidden" name="c1" value="${c1}" />
+    <input type="hidden" name="pcf1" value="${pcf1}" />
+    <input type="hidden" name="ef1" value="${ef1}" />
+    <input type="hidden" name="wnf1" value="${wnf1}" />
+    <input type="hidden" name="id2" value="${id2}" />
+    <input type="hidden" name="c2" value="${c2}" />
+    <input type="hidden" name="pcf2" value="${pcf2}" />
+    <input type="hidden" name="ef2" value="${ef2}" />
+    <input type="hidden" name="wnf2" value="${wnf2}" />
+
     <label>Numéro de carte :</label><br>
     <input type="text" name="numeroCarte" maxlength="19" required /><br><br>
 

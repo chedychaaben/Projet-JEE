@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="paiement" method="get">
+<form action="paiement" method="post">
 
     <!-- Trajet 1 -->
     <table border="1">

@@ -84,4 +84,13 @@ public class UserDAO {
                     .getResultList();
         }
     }
+
+    public User findByEmail(String email) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from User where email = :email", User.class)
+                    .setParameter("email", email)
+                    .uniqueResult();
+        }
+    }
+
 }
