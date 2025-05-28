@@ -1,7 +1,6 @@
 package controller;
 
 import dao.UserDAO;
-import model.Trajet;
 import model.User;
 
 import jakarta.servlet.ServletException;
@@ -10,7 +9,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.List;
-// LEZEM KEN EL USER BLOQUE MAYEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED5OLCHH !!!!!!! PLEASE DO IT
+
 @WebServlet("/utilisateurs")
 public class UtilisateurController extends HttpServlet {
 
@@ -37,27 +36,40 @@ public class UtilisateurController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+
         if ("se_deconnecter".equals(action)) {
             request.getSession().invalidate();
             response.sendRedirect("se_connecter.jsp");
+            return;
         }
 
-        if (action.equals("lister_tous_les_utilisateurs")) {
+        if ("bloquer_un_utilisateur".equals(action)) {
+            String idStr = request.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                userDAO.bloquerUtilisateur(id);
+            }
+            response.sendRedirect("utilisateurs?action=lister_tous_les_utilisateurs");
+            return;
+        }
+
+        if ("debloquer_un_utilisateur".equals(action)) {
+            String idStr = request.getParameter("id");
+            if (idStr != null) {
+                int id = Integer.parseInt(idStr);
+                userDAO.debloquerUtilisateur(id);
+            }
+            response.sendRedirect("utilisateurs?action=lister_tous_les_utilisateurs");
+            return;
+        }
+
+        if ("lister_tous_les_utilisateurs".equals(action)) {
             List<User> utilisateurs = userDAO.findAll();
             request.setAttribute("utilisateurs", utilisateurs);
-            request.getRequestDispatcher("/admin/liste_des_utilisateurs.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin_liste_des_utilisateurs.jsp").forward(request, response);
             return;
         }
     }
-
-
-
-
-
-
-
-
-
 
     private void handleSignup(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -99,10 +111,16 @@ public class UtilisateurController extends HttpServlet {
                 .orElse(null);
 
         if (found != null) {
+            if (found.isEstBanned()) {
+                request.setAttribute("error", "Votre compte est bloqué. Veuillez contacter l'administrateur.");
+                request.getRequestDispatcher("se_connecter.jsp").forward(request, response);
+                return;
+            }
+
             HttpSession session = request.getSession();
             session.setAttribute("user", found);
             if (found.isEstAdmin()) {
-                response.sendRedirect("admin/admin.jsp");
+                response.sendRedirect("admin.jsp");
             } else {
                 response.sendRedirect("pageacceuil.jsp");
             }

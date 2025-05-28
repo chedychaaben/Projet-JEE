@@ -57,7 +57,7 @@
             </li>
             <li>
                 <strong>Prix :</strong>
-                <%= (billet != null && billet.getTrajetAller() != null) ? String.format("%.2f €", billet.getTrajetAller().getPrix()) : "<span>Non spécifié</span>" %>
+                <%= (billet != null && billet.getTrajetAller() != null) ? String.format("%.2f TND", billet.getTrajetAller().getPrix()) : "<span>Non spécifié</span>" %>
             </li>
             <li><strong>Classe :</strong> <%= billet != null && billet.getTrajetAllerClasse() != null ? billet.getTrajetAllerClasse() : "<span>Non spécifiée</span>" %></li>
             <li><strong>Fenêtre :</strong> <%= billet != null && billet.isTrajetAllerPlaceCoteFenetre() ? "Oui" : "Non" %></li>
@@ -85,7 +85,7 @@
                     <strong>Date :</strong> <c:out value="${billet.trajetRetour.date}" default="Non spécifiée"/>
                 </li>
                 <li>
-                    <strong>Prix :</strong> <c:out value="${billet.trajetRetour.prix}" default="Non spécifié"/> €
+                    <strong>Prix :</strong> <c:out value="${billet.trajetRetour.prix}" default="Non spécifié"/> TND
                 </li>
                 <li><strong>Classe :</strong> <c:out value="${billet.trajetRetourClasse}" default="Non spécifiée"/></li>
                 <li><strong>Fenêtre :</strong> <c:out value="${billet.trajetRetourPlaceCoteFenetre ? 'Oui' : 'Non'}"/></li>
@@ -97,7 +97,7 @@
 
     <div>
         <a href="telecharger-ticket-pdf?id=<%= billet != null ? billet.getId() : 0 %>">Télécharger le PDF</a>
-        <a href="liste_de_mes_billets.jsp">Voir l'historique</a>
+        <a href="billets?action=liste_de_mes_billets">Voir l'historique</a>
     </div>
 </div>
 

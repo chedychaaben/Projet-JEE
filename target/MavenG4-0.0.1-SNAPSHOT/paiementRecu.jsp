@@ -97,7 +97,7 @@
 
     <div>
         <a href="telecharger-ticket-pdf?id=<%= billet != null ? billet.getId() : 0 %>">Télécharger le PDF</a>
-        <a href="liste_de_mes_billets.jsp">Voir l'historique</a>
+        <a href="billets?action=liste_de_mes_billets">Voir l'historique</a>
     </div>
 </div>
 

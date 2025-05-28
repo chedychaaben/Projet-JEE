@@ -1,6 +1,7 @@
 package dao;
 
 import model.Billet;
+import model.Trajet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,7 +30,21 @@ public class BilletDAO {
         boolean success = false;
         try {
             tx = session.beginTransaction();
+
             session.persist(billet);
+
+            Trajet trajetAller = billet.getTrajetAller();
+            if (trajetAller != null) {
+                trajetAller.setPlacesDisponibles(trajetAller.getPlacesDisponibles() - 1);
+                session.merge(trajetAller);
+            }
+
+            Trajet trajetRetour = billet.getTrajetRetour();
+            if (trajetRetour != null) {
+                trajetRetour.setPlacesDisponibles(trajetRetour.getPlacesDisponibles() - 1);
+                session.merge(trajetRetour);
+            }
+
             tx.commit();
             success = true;
         } catch (Exception e) {
@@ -40,6 +55,7 @@ public class BilletDAO {
         }
         return success;
     }
+
 
     public boolean update(Billet billet) {
         Session session = sessionFactory.openSession();
@@ -122,4 +138,91 @@ public class BilletDAO {
         session.close();
         return result;
     }
+
+    public boolean passerDeEncoursAnnulationAAnnule(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        boolean success = false;
+
+        try {
+            tx = session.beginTransaction();
+            Billet billet = session.get(Billet.class, id);
+            if (billet != null && billet.getEtat() == Billet.Etat.ENCOURSDANNULATION) {
+                // Add back places on trajets
+                Trajet trajetAller = billet.getTrajetAller();
+                Trajet trajetRetour = billet.getTrajetRetour();
+
+                if (trajetAller != null) {
+                    trajetAller.setPlacesDisponibles(trajetAller.getPlacesDisponibles() + 1);
+                    session.merge(trajetAller);
+                }
+                if (trajetRetour != null) {
+                    trajetRetour.setPlacesDisponibles(trajetRetour.getPlacesDisponibles() + 1);
+                    session.merge(trajetRetour);
+                }
+
+                billet.setEtat(Billet.Etat.ANNULE);
+                session.merge(billet);
+                tx.commit();
+                success = true;
+            }
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+
+        return success;
+    }
+
+    public boolean passerDeEncoursAnnulationAAchete(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        boolean success = false;
+
+        try {
+            tx = session.beginTransaction();
+            Billet billet = session.get(Billet.class, id);
+            if (billet != null && billet.getEtat() == Billet.Etat.ENCOURSDANNULATION) {
+                billet.setEtat(Billet.Etat.ACHETE);
+                session.merge(billet);
+                tx.commit();
+                success = true;
+            }
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+
+        return success;
+    }
+
+    public boolean passerDeAcheteAEncoursAnnulation(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        boolean success = false;
+
+        try {
+            tx = session.beginTransaction();
+            Billet billet = session.get(Billet.class, id);
+            if (billet != null && billet.getEtat() == Billet.Etat.ACHETE) {
+                billet.setEtat(Billet.Etat.ENCOURSDANNULATION);
+                session.merge(billet);
+                tx.commit();
+                success = true;
+            }
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+
+        return success;
+    }
+
+
 }

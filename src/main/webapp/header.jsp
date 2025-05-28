@@ -28,9 +28,9 @@
                 <a href="cree_un_compte.jsp" class="btn btn-dark">Creer un compte</a>
             <% } else { %>
             <% if (!user.isEstAdmin()) { %>
-                <a href="liste_de_mes_billets.jsp" class="btn btn-outline-dark">Mes Billets</a>
+                <a href="billets?action=liste_de_mes_billets" class="btn btn-outline-dark">Mes Billets</a>
             <% } else { %>
-                <a href="admin/admin.jsp" class="btn btn-outline-dark">Admin</a>
+                <a href="admin.jsp" class="btn btn-outline-dark">Admin</a>
             <% } %>
                 <a href="utilisateurs?action=se_deconnecter" class="btn btn-dark">Deconnexion</a>
             <% } %>

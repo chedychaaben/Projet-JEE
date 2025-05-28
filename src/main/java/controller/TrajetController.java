@@ -62,7 +62,7 @@ public class TrajetController extends HttpServlet {
 
             if (action.equals("modifier_un_trajet")) {
                 req.setAttribute("trajet", trajet);
-                req.getRequestDispatcher("/admin/modifier_trajet_form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin_modifier_trajet_form.jsp").forward(req, resp);
                 return;
             }
 
@@ -77,7 +77,7 @@ public class TrajetController extends HttpServlet {
         if (action.equals("lister_tous_les_trajets")) {
             List<Trajet> trajets = trajetDAO.findAll();
             req.setAttribute("trajets", trajets);
-            req.getRequestDispatcher("/admin/liste_des_trajets.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin_liste_des_trajets.jsp").forward(req, resp);
             return;
         }
 
@@ -127,12 +127,12 @@ public class TrajetController extends HttpServlet {
                     resp.sendRedirect(req.getContextPath() + "/trajets?action=lister_tous_les_trajets");
                 } else {
                     req.setAttribute("error", "Erreur lors de la création du trajet.");
-                    req.getRequestDispatcher("/admin/creer_trajet_form.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/admin_creer_trajet_form.jsp").forward(req, resp);
                 }
 
             } catch (Exception e) {
                 req.setAttribute("error", "Erreur: " + e.getMessage());
-                req.getRequestDispatcher("/admin/creer_trajet_form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin_creer_trajet_form.jsp").forward(req, resp);
             }
         } else if ("modifier_un_trajet".equals(action)) {
             try {
@@ -171,12 +171,12 @@ public class TrajetController extends HttpServlet {
                 } else {
                     req.setAttribute("error", "Erreur lors de la modification du trajet.");
                     req.setAttribute("trajet", trajet);
-                    req.getRequestDispatcher("/admin/modifier_trajet_form.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/admin_modifier_trajet_form.jsp").forward(req, resp);
                 }
 
             } catch (Exception e) {
                 req.setAttribute("error", "Erreur: " + e.getMessage());
-                req.getRequestDispatcher("/admin/modifier_trajet_form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin_modifier_trajet_form.jsp").forward(req, resp);
             }
         } else {
             // Action inconnue

@@ -93,4 +93,40 @@ public class UserDAO {
         }
     }
 
+    public boolean bloquerUtilisateur(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            if (user == null) return false;
+
+            user.setEstBanned(true);
+
+            tx = session.beginTransaction();
+            session.merge(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+    }
+
+    public boolean debloquerUtilisateur(int id) {
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            User user = session.get(User.class, id);
+            if (user == null) return false;
+
+            user.setEstBanned(false);
+
+            tx = session.beginTransaction();
+            session.merge(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+    }
+
 }

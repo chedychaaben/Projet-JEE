@@ -23,7 +23,7 @@
             <td>${trajet.villeArrivee}</td>
             <td>${trajet.heureDepart}</td>
             <td>${trajet.heureArrivee}</td>
-            <td>${trajet.prix} €</td>
+            <td>${trajet.prix} TND</td>
             <td>${trajet.placesDisponibles}</td>
 
             <td>
