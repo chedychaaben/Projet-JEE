@@ -1,7 +1,6 @@
 <%@ include file="header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Modifier un Trajet</title>
@@ -42,8 +41,7 @@
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date :</label>
-            <fmt:formatDate value="${trajet.date}" pattern="yyyy-MM-dd" var="formattedDate"/>
-            <input type="date" id="date" name="date" value="${formattedDate}" class="form-control" required/>
+            <input type="date" id="date" name="date" value="${trajet.date}" class="form-control" required/>
         </div>
         <div class="mb-3">
             <label for="prix" class="form-label">Prix (TND) :</label>
