@@ -91,7 +91,7 @@
             <label for="placesDisponibles" class="form-label">Places disponibles :</label>
             <input type="number" id="placesDisponibles" name="placesDisponibles" class="form-control" required/>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Créer</button>
+        <button type="submit" class="btn btn-dark w-100">Créer</button>
     </form>
 </div>
 </body>
