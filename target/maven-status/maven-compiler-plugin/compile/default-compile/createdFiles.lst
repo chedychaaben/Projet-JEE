@@ -2,6 +2,7 @@ controller\PaiementController.class
 model\Billet$Classe.class
 model\Trajet.class
 controller\UtilisateurController.class
+controller\TicketPDFController.class
 dao\BilletDAO.class
 model\Billet.class
 controller\RecherchetrajetController.class

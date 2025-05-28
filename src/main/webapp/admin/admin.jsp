@@ -18,7 +18,7 @@
 </a>
 
 
-<a href="annulation_des_billets?action=lister_tous_les_demandes_annulation">
+<a href="billets?action=lister_tous_les_demandes_annulation">
     Gerer les demandes d'annulation
 </a>
 

@@ -10,7 +10,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.List;
-
+// LEZEM KEN EL USER BLOQUE MAYEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED5OLCHH !!!!!!! PLEASE DO IT
 @WebServlet("/utilisateurs")
 public class UtilisateurController extends HttpServlet {
 
