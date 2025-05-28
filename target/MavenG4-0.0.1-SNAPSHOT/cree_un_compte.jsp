@@ -33,7 +33,7 @@
                 <input class="form-check-input" type="checkbox" id="estAdmin" name="estAdmin" value="true" />
                 <label class="form-check-label" for="estAdmin">Admin</label>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Créer un compte</button>
+            <button type="submit" class="btn btn-dark w-100">Créer un compte</button>
         </form>
     </div>
 </div>

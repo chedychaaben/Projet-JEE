@@ -18,7 +18,7 @@
             session.removeAttribute("message");
         }
     %>
-    <a href="${pageContext.request.contextPath}/admin_creer_trajet_form.jsp" class="btn btn-primary mb-3">Créer un nouveau trajet</a>
+    <a href="${pageContext.request.contextPath}/admin_creer_trajet_form.jsp" class="btn btn-dark mb-3">Créer un nouveau trajet</a>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>

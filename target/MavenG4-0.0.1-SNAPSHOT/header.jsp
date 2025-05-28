@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="pageacceuil.jsp">TrainTicket</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarButtons">
             <% if (user == null) { %>
             <a href="se_connecter.jsp" class="btn btn-outline-light me-2">Se connecter</a>
-            <a href="cree_un_compte.jsp" class="btn btn-warning">Creer un compte</a>
+            <a href="cree_un_compte.jsp" class="btn btn-light">Creer un compte</a>
             <% } else { %>
             <% if (!user.isEstAdmin()) { %>
             <a href="billets?action=liste_de_mes_billets" class="btn btn-outline-light me-2">Mes Billets</a>
@@ -30,7 +30,7 @@
             <a href="admin.jsp" class="btn btn-outline-light me-2">Admin</a>
             <% } %>
             <span class="navbar-text text-light me-3">Bienvenue, <%= user.getPrenom() %></span>
-            <a href="utilisateurs?action=se_deconnecter" class="btn btn-danger">Deconnexion</a>
+            <a href="utilisateurs?action=se_deconnecter" class="btn btn-light">Deconnexion</a>
             <% } %>
         </div>
     </div>
