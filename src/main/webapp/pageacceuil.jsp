@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="card p-4">
-    <h1 class="text-center mb-4 text-dark">Bienvenue sur TrainTicket !</h1>
+    <h1 class="text-center mb-4 text-dark">Bienvenue !</h1>
     <h3 class="text-center mb-4">Rechercher un trajet</h3>
     <form action="recherche" method="get" class="p-3">
         <input type="hidden" name="direction" value="1">
