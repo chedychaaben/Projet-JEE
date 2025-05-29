@@ -7,9 +7,6 @@
 <body>
 <div class="card p-4">
     <h1 class="text-center mb-4">Créer un Nouveau Trajet</h1>
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger">${error}</div>
-    </c:if>
     <form method="post" action="${pageContext.request.contextPath}/trajets?action=creer_un_trajet" class="p-3">
         <div class="mb-3">
             <label for="villeDepart" class="form-label">Ville de départ :</label>

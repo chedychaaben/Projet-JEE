@@ -85,7 +85,7 @@ public class TicketPDFController extends HttpServlet {
                     trajet.getHeureArrivee() != null ? trajet.getHeureArrivee().format(timeFormatter) : "N/A").append("</p>");
             t.append("<p><strong>Date :</strong> ").append(
                     trajet.getDate() != null ? trajet.getDate().format(dateFormatter) : "N/A").append("</p>");
-            t.append("<p><strong>Prix :</strong> ").append(String.format("%.2f €", trajet.getPrix())).append("</p>");
+            t.append("<p><strong>Prix :</strong> ").append(String.format("%.2f TND", trajet.getPrix())).append("</p>");
             t.append("<p><strong>Places disponibles :</strong> ").append(trajet.getPlacesDisponibles()).append("</p>");
             return t.toString();
         };
