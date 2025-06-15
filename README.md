@@ -1,4 +1,4 @@
-# Train Ticket Management System - MavenG4
+# Train Ticket Management System - Java Entreprise Edition (Academic Project)
 
 ## Description
 This project is a web application developed using Java Enterprise Edition (JEE) with servlets, JSP (JavaServer Pages), and JSTL (JavaServer Pages Standard Tag Library). It provides a comprehensive train ticket management system with features for both users and administrators.
